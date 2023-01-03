@@ -30,7 +30,7 @@
 import { defineComponent } from 'vue'
 import { NPageHeader, NSpace, NButton, NSwitch, NIcon, NLayout, NLayoutContent, NLayoutSider, NMenu, NAvatar, NLayoutFooter, type MenuOption } from 'naive-ui'
 import { MoonRegular } from '@vicons/fa'
-import { version } from '/package.json'
+import { version } from '@/../package.json'
 
 defineComponent({
     components: {
