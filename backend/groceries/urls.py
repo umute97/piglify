@@ -1,7 +1,7 @@
 from django.urls import path
 
-from . import views
+from .views import GroceryViewset
 
 urlpatterns = [
-    path('', views.index, name='index'),
+    path('', GroceryViewset.as_view({'get': 'list'}), name='groceriesview'),
 ]
