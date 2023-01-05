@@ -14,6 +14,6 @@ class GroceryViewset(viewsets.ModelViewSet):
     model = Grocery
     filter_backends = (DjangoFilterBackend, OrderingFilter)
     filterset_class = GroceryFilter
-    ordering_fields = ("date_added", "id", "name", "bought")
-    ordering = ("-id")
+    ordering_fields = ("date_added", "name", "bought")
+    ordering = ("-date_added")
     queryset = Grocery.objects.all()

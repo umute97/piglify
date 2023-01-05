@@ -3,11 +3,12 @@ import django_filters
 from .models import Grocery
 
 class GroceryFilter(django_filters.FilterSet):
-    date_range = django_filters.DateRangeFilter(field_name="date_added")
-    start_date = django_filters.DateFilter(field_name="date_added", lookup_expr=("gte"))
-    end_date = django_filters.DateFilter(field_name="date_added", lookup_expr=("lte"))
+    name = django_filters.CharFilter(field_name="name", lookup_expr="icontains")
+    contact = django_filters.CharFilter(field_name="contact", lookup_expr="icontains")
+    location = django_filters.CharFilter(field_name="location", lookup_expr="icontains")
+    bought = django_filters.BooleanFilter(field_name="bought")
 
     class Meta:
         model = Grocery
-        fields = ["date_added", "id"]
+        fields = ["name", "contact", "location", "bought"]
 
