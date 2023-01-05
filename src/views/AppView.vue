@@ -18,7 +18,9 @@
             <n-layout-sider bordered>
                 <n-menu :options="siderOptions" />
             </n-layout-sider>
-            <n-layout-content>Test</n-layout-content>
+            <n-layout-content>
+                <router-view></router-view>
+            </n-layout-content>
         </n-layout>
         <n-page-header class="footer">
             Made with love in Waldstadt, ver. {{ version }}
@@ -27,8 +29,9 @@
 </template>
 
 <script setup lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, h } from 'vue'
 import { NPageHeader, NSpace, NButton, NSwitch, NIcon, NLayout, NLayoutContent, NLayoutSider, NMenu, NAvatar, NLayoutFooter, type MenuOption } from 'naive-ui'
+import { RouterLink, RouterView } from 'vue-router'
 import { MoonRegular } from '@vicons/fa'
 import { version } from '@/../package.json'
 
@@ -44,17 +47,38 @@ defineComponent({
         NLayoutFooter,
         NMenu,
         NAvatar,
+
+        RouterView,
+        RouterLink,
     }
 })
 
 const siderOptions: MenuOption[] = [
     {
-        label: "Chores",
-        key: "chores",
+        label: () => h(
+            RouterLink,
+            {
+                to: {
+                    name: 'chores',
+                    path: '/chores',
+                }
+            },
+            { default: () => 'Default chores'}
+        ),
+        key: 'chores',
     },
     {
-        label: "Groceries",
-        key: "groceries",
+        label: () => h(
+            RouterLink,
+            {
+                to: {
+                    name: 'groceries',
+                    path: '/groceries'
+                }
+            },
+            { default: () => 'Default groceries'}
+        ),
+        key: 'groceries',
     },
 ]
 </script>
