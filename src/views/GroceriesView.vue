@@ -17,7 +17,7 @@ import { NLayout, NLayoutContent, NLayoutSider, NDataTable } from 'naive-ui'
 import { defineComponent, onMounted, reactive, ref, type Ref } from 'vue'
 import { useUrlStore } from '@/stores/urls'
 import axios from 'axios'
-import type { FilterOptionValue, TableColumn } from 'naive-ui/es/data-table/src/interface';
+import type { TableColumn } from 'naive-ui/es/data-table/src/interface';
 
 defineComponent({
     components: {
@@ -35,6 +35,13 @@ interface Grocery {
     bought: boolean,
     contact: string,
 }
+
+interface QueryResponse {
+    pageCount: number,
+    total: number,
+    data: Grocery[],
+}
+
 const dateColumn = {
     title: "Date added",
     key: "date_added",
@@ -79,35 +86,55 @@ const urlStore = useUrlStore()
 
 let groceries: Ref<Grocery[]> = ref([])
 const dateColumnReactive = reactive(dateColumn)
+let loading = ref(true)
 const pagination = reactive({
     page: 1,
     pageCount: 1,
-    pageSize: 10,
+    pageSize: 1,
 })
 
-function query(page: number, pageSize = 10, order = 'ascend', filterValues: FilterOptionValue[] = []) {
+function query(page: number, pageSize = 10, order = true): Promise<QueryResponse> {
     return new Promise(async (resolve) => {
         let data: Grocery[] = []
+        let total = 0
         const offset = (page - 1) * pageSize
         let url = `${urlStore.backendIP}/groceries?format=json&limit=${pageSize}&offset=${offset}`
 
         await axios.get(url).then((response) => {
             data = response.data.results
+            total = response.data.count
         })
 
-        const orderedData = order === 'descend' ? data.reverse() : data
+        const orderedData = order ? data.reverse() : data
         // const filteredData = filterValues.length
         //     ? orderedData.filter((row) => filterValues.includes(row.column2))
         //     : orderedData
 
-        const total = data.length
         const pageCount = Math.ceil(total / pageSize)
-        resolve({ pageCount, data, total })
+        resolve({ pageCount, data: orderedData, total })
     })
 }
 
+function handlePageChange(currentPage: number) {
+    if (!loading.value) {
+        loading.value = true;
+        query(currentPage, pagination.pageSize, dateColumnReactive.sorter)
+            .then((response: QueryResponse) => {
+                groceries.value = response.data
+                pagination.page = currentPage
+                pagination.pageCount = response.pageCount
+                loading.value = false
+            })
+    }
+}
+
 onMounted(async () => {
-    query(pagination.page, pagination.pageSize, dateColumnReactive.sortOrder,)
+    query(pagination.page, pagination.pageSize, dateColumnReactive.sorter)
+        .then((response: QueryResponse) => {
+            groceries.value = response.data
+            pagination.pageCount = response.pageCount
+            loading.value = false
+        })
 })
 
 </script>
