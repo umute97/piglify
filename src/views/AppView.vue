@@ -18,7 +18,7 @@
             <n-layout-sider bordered>
                 <n-menu :options="siderOptions" />
             </n-layout-sider>
-            <n-layout-content>
+            <n-layout-content id="router-view">
                 <router-view></router-view>
             </n-layout-content>
         </n-layout>
@@ -63,7 +63,7 @@ const siderOptions: MenuOption[] = [
                     path: '/chores',
                 }
             },
-            { default: () => 'Default chores'}
+            { default: () => 'Default chores' }
         ),
         key: 'chores',
     },
@@ -76,7 +76,7 @@ const siderOptions: MenuOption[] = [
                     path: '/groceries'
                 }
             },
-            { default: () => 'Default groceries'}
+            { default: () => 'Default groceries' }
         ),
         key: 'groceries',
     },

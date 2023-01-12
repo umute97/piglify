@@ -1,154 +1,29 @@
 <template>
-    <div id="groceries-container">
+    <div>
         <n-layout has-sider sider-placement="right">
-            <n-layout-content>
-                <n-data-table remote ref="table" :columns="columns" :data="groceries" :loading="loading"
-                    :pagination="pagination" @update:sorter="handleSorterChange" @update:page="handlePageChange" />
+            <n-layout-content id="table-container">
+                <groceries-table />
             </n-layout-content>
             <n-layout-sider bordered>
-                <n-button @click="toggleSorter('descend')">Descend</n-button>
-                <n-button @click="toggleSorter('ascend')">Ascend</n-button>
-                {{ dateColumn.sortOrder }}
+                Test
             </n-layout-sider>
         </n-layout>
     </div>
 </template>
 
 <script setup lang="ts">
-import { NLayout, NLayoutContent, NLayoutSider, NButton, NDataTable, type DataTableSortState, type DataTableColumn } from 'naive-ui'
-import { defineComponent, onMounted, reactive, ref, type Ref } from 'vue'
-import { useUrlStore } from '@/stores/urls'
-import axios from 'axios'
-import type { SortOrder } from 'naive-ui/es/data-table/src/interface';
+import { NLayout, NLayoutContent, NLayoutSider, NDataTable } from 'naive-ui'
+import { defineComponent } from 'vue'
+import GroceriesTable from '@/components/GroceriesTable.vue'
 
 defineComponent({
-    components: {
-        NLayout, NLayoutContent, NLayoutSider,
-        NDataTable,
-    }
-})
-
-interface Grocery {
-    id: number,
-    date_added: string,
-    name: string,
-    qty: number,
-    location: string | null,
-    bought: boolean,
-    contact: string,
-}
-
-interface QueryResponse {
-    pageCount: number,
-    total: number,
-    data: Grocery[],
-}
-
-const urlStore = useUrlStore()
-
-const groceries: Ref<Grocery[]> = ref([])
-const dateColumnTemp: DataTableColumn = {
-    title: "Date added",
-    key: "date_added",
-    sorter: true,
-    sortOrder: false,
-}
-const dateColumn = reactive(dateColumnTemp)
-const columns = reactive([
-    {
-        title: "Bought?",
-        key: "bought",
-    },
-    {
-        title: "Name",
-        key: "name",
-    },
-    {
-        title: "Qty",
-        key: "qty",
-    },
-    {
-        title: "Where to buy?",
-        key: "location",
-    },
-    dateColumn,
-    {
-        title: "Contact",
-        key: "contact",
-    },
-])
-const loading = ref(true)
-const pagination = reactive({
-    page: 1,
-    pageCount: 1,
-    pageSize: 10,
-})
-
-function query(page: number, pageSize = 10, order: SortOrder = 'descend'): Promise<QueryResponse> {
-    return new Promise(async (resolve) => {
-        let data: Grocery[] = []
-        let total = 0
-        const offset = (page - 1) * pageSize
-        let url = `${urlStore.backendIP}/groceries?format=json&limit=${pageSize}&offset=${offset}&ordering=`
-
-        if (order === 'descend') {
-            url += '-'
-        }
-        url += 'date_added'
-
-        await axios.get(url).then((response) => {
-            data = response.data.results
-            total = response.data.count
-        })
-
-        const pageCount = Math.ceil(total / pageSize)
-        resolve({ pageCount, data, total })
-    })
-}
-
-function handlePageChange(currentPage: number) {
-    if (!loading.value) {
-        loading.value = true;
-        query(currentPage, pagination.pageSize, dateColumn.sortOrder)
-            .then((response: QueryResponse) => {
-                groceries.value = response.data
-                pagination.page = currentPage
-                pagination.pageCount = response.pageCount
-                loading.value = false
-            })
-    }
-}
-
-function handleSorterChange(sorter: DataTableSortState) {
-    if (!sorter || sorter.columnKey === 'date_added') {
-        if (!loading.value) {
-            loading.value = true
-            query(pagination.page, pagination.pageSize, !sorter ? false : sorter.order)
-                .then((response: QueryResponse) => {
-                    dateColumn.sortOrder = !sorter ? false : sorter.order
-                    groceries.value = response.data
-                    pagination.pageCount = response.pageCount
-                    loading.value = false
-                })
-        }
-    }
-}
-
-function toggleSorter(state: SortOrder) {
-    dateColumn.sortOrder = state
-}
-
-onMounted(async () => {
-    query(pagination.page, pagination.pageSize, dateColumn.sortOrder)
-        .then((response: QueryResponse) => {
-            groceries.value = response.data
-            pagination.pageCount = response.pageCount
-            loading.value = false
-        })
+    components: { NLayout, NLayoutContent, NLayoutSider, GroceriesTable }
 })
 
 </script>
 
 <style scoped>
-
+#table-container {
+    padding: 1em;
+}
 </style>
