@@ -34,7 +34,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
     'django_filters',
-    'groceries.apps.GroceriesConfig',
+    'piglify.apps.PiglifyConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

@@ -7,7 +7,7 @@ import django.utils.timezone
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('groceries', '0001_initial'),
+        ('piglify', '0001_initial'),
     ]
 
     operations = [

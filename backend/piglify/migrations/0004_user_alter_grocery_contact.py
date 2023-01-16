@@ -7,7 +7,7 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('groceries', '0003_grocery_contact'),
+        ('piglify', '0003_grocery_contact'),
     ]
 
     operations = [
@@ -23,6 +23,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='grocery',
             name='contact',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='groceries.user'),
+            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='piglify.user'),
         ),
     ]

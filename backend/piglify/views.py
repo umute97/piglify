@@ -1,13 +1,11 @@
-from django.shortcuts import render
-from django.http import HttpResponse
 from rest_framework import viewsets
 from rest_framework.filters import OrderingFilter
 
 from django_filters.rest_framework import DjangoFilterBackend
 
-from .models import Grocery
+from .models import Grocery, User
 from .filters import GroceryFilter
-from .serializers import GrocerySerializer
+from .serializers import GrocerySerializer, UserSerializer
 
 class GroceryViewset(viewsets.ModelViewSet):
     serializer_class = GrocerySerializer
@@ -17,3 +15,9 @@ class GroceryViewset(viewsets.ModelViewSet):
     ordering_fields = ("date_added", "name", "bought")
     ordering = ("-date_added")
     queryset = Grocery.objects.all()
+
+class UserViewset(viewsets.ModelViewSet):
+    serializer_class = UserSerializer
+    model = User
+    queryset = User.objects.all()
+
