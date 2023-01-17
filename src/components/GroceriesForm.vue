@@ -1,5 +1,5 @@
 <template>
-    <n-form>
+    <n-form ref="formRef" :model="formValue">
         <n-form-item>
             <n-input v-model:value="formValue.name" placeholder="Name" />
         </n-form-item>
@@ -10,7 +10,10 @@
             <n-input v-model:value="formValue.location" placeholder="Where to buy?" />
         </n-form-item>
         <n-form-item>
-            <n-select v-model:value="contactRef" :options="contactOptions" />
+            <n-select v-model:value="contactRef" :options="contactOptions" size="medium" placeholder="Contact" />
+        </n-form-item>
+        <n-form-item>
+            <n-button @click="validateAndSubmit">Submit</n-button>
         </n-form-item>
     </n-form>
 </template>
@@ -52,6 +55,10 @@ const formValue: GroceryEntry = reactive({
 
 const contactRef: Ref<string | null> = ref(null)
 let contactOptions: Ref<SelectMixedOption[]> = ref([])
+
+function validateAndSubmit(event: MouseEvent) {
+    console.log("Clicked submit!")
+}
 
 onMounted(async () => {
     await axios.get(`${urlStore.backendIP}/users`).then((response) => {
