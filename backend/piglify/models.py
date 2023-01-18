@@ -1,12 +1,6 @@
 from django.db import models
 from django.utils import timezone
 
-USERS = [
-    ("umut", "Umut"),
-    ("jonny", "Jonny"),
-    ("simon", "Simon"),
-]
-
 class Grocery(models.Model):
     name = models.CharField(max_length=50, null=False)
     qty = models.IntegerField(default=1, blank=False, null=False)
