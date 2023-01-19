@@ -2,7 +2,7 @@
     <div>
         <n-layout has-sider sider-placement="right">
             <n-layout-content class="container">
-                <n-button @click="showGroceriesForm" size="large" round type="primary" class="grocery-button">
+                <n-button @click="showModal=true" size="large" round type="primary" class="grocery-button">
                     <template #icon>
                         <n-icon :component="CartPlus"></n-icon>
                     </template>
@@ -14,24 +14,31 @@
                 Test
             </n-layout-sider>
         </n-layout>
+        <n-modal v-model:show="showModal" preset="dialog" title="Add Grocery">
+            <template #action>
+                <n-button type="primary" @click="submit">Submit</n-button>
+            </template>
+            <groceries-form />
+        </n-modal>
     </div>
 </template>
 
 <script setup lang="ts">
-import { NLayout, NLayoutContent, NLayoutSider, NButton, NIcon } from 'naive-ui'
-import { defineComponent } from 'vue'
+import { NLayout, NLayoutContent, NLayoutSider, NButton, NIcon, NModal } from 'naive-ui'
+import { defineComponent, ref } from 'vue'
 import { CartPlus } from '@vicons/fa'
 import GroceriesTable from '@/components/GroceriesTable.vue'
 import GroceriesForm from '@/components/GroceriesForm.vue'
 
 defineComponent({
-    components: { NLayout, NLayoutContent, NLayoutSider, NButton, GroceriesTable, GroceriesForm, NIcon, CartPlus }
+    components: { NLayout, NLayoutContent, NLayoutSider, NButton, NModal, GroceriesTable, GroceriesForm, NIcon, CartPlus }
 })
 
-function showGroceriesForm(event: MouseEvent) {
-    console.log("Grocery form should show up now!")
-}
+const showModal = ref(false);
 
+function submit(e: MouseEvent) {
+    console.log("Clicked submit!")
+}
 </script>
 
 <style scoped>

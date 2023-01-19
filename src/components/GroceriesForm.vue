@@ -12,9 +12,6 @@
         <n-form-item>
             <n-select v-model:value="contactRef" :options="contactOptions" size="medium" placeholder="Contact" />
         </n-form-item>
-        <n-form-item>
-            <n-button @click="validateAndSubmit">Submit</n-button>
-        </n-form-item>
     </n-form>
 </template>
 
