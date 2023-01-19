@@ -34,6 +34,6 @@ coverage
 __pycache__/
 local_settings.py
 
-backend/piglify-venv/**
+backend/piglify-venv
 .env
 db.sqlite3
