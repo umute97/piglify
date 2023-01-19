@@ -1,9 +1,13 @@
-from django.urls import path
+from django.urls import path, include
+
+from rest_framework.routers import DefaultRouter
 
 from .views import GroceryViewset
 from .views import UserViewset
 
+router = DefaultRouter()
+router.register(r'groceries', GroceryViewset, basename="grocery")
+router.register(r'users', UserViewset, basename="user")
 urlpatterns = [
-    path('groceries', GroceryViewset.as_view({'get': 'list'}), name='groceriesview'),
-    path('users', UserViewset.as_view({'get': 'list'}), name='usersview'),
+    path('', include(router.urls))
 ]
