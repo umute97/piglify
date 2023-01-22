@@ -19,7 +19,9 @@
                 <n-menu :options="siderOptions" />
             </n-layout-sider>
             <n-layout-content id="router-view">
-                <router-view></router-view>
+                <n-message-provider>
+                    <router-view></router-view>
+                </n-message-provider>
             </n-layout-content>
         </n-layout>
         <n-page-header class="footer">
@@ -30,7 +32,7 @@
 
 <script setup lang="ts">
 import { defineComponent, h } from 'vue'
-import { NPageHeader, NSpace, NButton, NSwitch, NIcon, NLayout, NLayoutContent, NLayoutSider, NMenu, NAvatar, NLayoutFooter, type MenuOption } from 'naive-ui'
+import { NPageHeader, NSpace, NButton, NSwitch, NIcon, NLayout, NLayoutContent, NLayoutSider, NMenu, NAvatar, NLayoutFooter, NMessageProvider, type MenuOption } from 'naive-ui'
 import { RouterLink, RouterView } from 'vue-router'
 import { MoonRegular } from '@vicons/fa'
 import { version } from '@/../package.json'
@@ -47,6 +49,7 @@ defineComponent({
         NLayoutFooter,
         NMenu,
         NAvatar,
+        NMessageProvider,
 
         RouterView,
         RouterLink,

@@ -2,7 +2,7 @@
     <div>
         <n-layout has-sider sider-placement="right">
             <n-layout-content class="container">
-                <n-button @click="showModal=true" size="large" round type="primary" class="grocery-button">
+                <n-button @click="showModal = true" size="large" round type="primary" class="grocery-button">
                     <template #icon>
                         <n-icon :component="CartPlus"></n-icon>
                     </template>
@@ -15,16 +15,15 @@
             </n-layout-sider>
         </n-layout>
         <n-modal v-model:show="showModal" preset="dialog" title="Add Grocery">
-            <template #action>
-                <n-button type="primary" @click="submit">Submit</n-button>
-            </template>
-            <groceries-form />
+            <n-message-provider>
+                <groceries-form @close-and-refresh-groceries="closeFormAndRefreshTable"/>
+            </n-message-provider>
         </n-modal>
     </div>
 </template>
 
 <script setup lang="ts">
-import { NLayout, NLayoutContent, NLayoutSider, NButton, NIcon, NModal } from 'naive-ui'
+import { NLayout, NLayoutContent, NLayoutSider, NButton, NIcon, NModal, NMessageProvider, useMessage } from 'naive-ui'
 import { defineComponent, ref } from 'vue'
 import { CartPlus } from '@vicons/fa'
 import GroceriesTable from '@/components/GroceriesTable.vue'
@@ -35,9 +34,12 @@ defineComponent({
 })
 
 const showModal = ref(false);
+const message = useMessage()
 
-function submit(e: MouseEvent) {
-    console.log("Clicked submit!")
+function closeFormAndRefreshTable() {
+    showModal.value = showModal.value ? !showModal.value : showModal.value
+    message.success('Successfully added grocery!')
+    // TODO: REFRESH TABLE
 }
 </script>
 
