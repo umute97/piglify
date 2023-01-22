@@ -17,7 +17,7 @@ class User(models.Model):
 class Grocery(models.Model):
     name = models.CharField(max_length=50, null=False)
     qty = models.IntegerField(default=1, blank=False, null=False)
-    location = models.CharField(max_length=50, null=True)
+    location = models.CharField(max_length=50, null=True, blank=True)
     date_added = models.DateTimeField(default=timezone.now)
     bought = models.BooleanField(default=False, blank=False, null=False)
     contact = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=False)
