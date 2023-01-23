@@ -21,7 +21,8 @@ interface Grocery {
     qty: number,
     location: string | null,
     bought: boolean,
-    contact: string,
+    contact: number,
+    contact_name: string
 }
 
 interface QueryResponse {
@@ -37,7 +38,7 @@ const dateColumnTemp: DataTableColumn = {
     title: "Date added",
     key: "date_added",
     sorter: true,
-    sortOrder: false,
+    sortOrder: "descend",
 }
 const dateColumn = reactive(dateColumnTemp)
 const columns = reactive([
@@ -60,7 +61,7 @@ const columns = reactive([
     dateColumn,
     {
         title: "Contact",
-        key: "contact",
+        key: "contact_name",
     },
 ])
 const pagination = reactive({

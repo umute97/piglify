@@ -142,6 +142,7 @@ function validateAndTrySubmit(e: MouseEvent) {
     formRef.value?.validate(async (errors) => {
         if (!errors) {
             formValue.contact = contactRef.value;
+            console.log("formValue", formValue)
             await axios.post(`${urlStore.backendIP}/groceries/`, formValue).then((response) => {
                 if (response.status === 201) {
                     message.success('Added grocery!')
