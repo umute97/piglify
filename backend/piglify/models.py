@@ -22,5 +22,9 @@ class Grocery(models.Model):
     bought = models.BooleanField(default=False, blank=False, null=False)
     contact = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=False)
 
+    @property
+    def contact_name(self):
+        return self.contact.full_name
+
     def __str__(self):
         return f"{self.name}: x{self.qty}, bought: {self.bought}"
