@@ -8,7 +8,7 @@
                     </template>
                     Add item
                 </n-button>
-                <groceries-table />
+                <groceries-table ref="groceryTable"/>
             </n-layout-content>
             <n-layout-sider bordered>
                 Test
@@ -33,13 +33,14 @@ defineComponent({
     components: { NLayout, NLayoutContent, NLayoutSider, NButton, NModal, GroceriesTable, GroceriesForm, NIcon, CartPlus }
 })
 
-const showModal = ref(false);
+const showModal = ref(false)
 const message = useMessage()
+const groceryTable = ref()
 
 function closeFormAndRefreshTable() {
     showModal.value = showModal.value ? !showModal.value : showModal.value
     message.success('Successfully added grocery!')
-    // TODO: REFRESH TABLE
+    groceryTable.value.refreshTable()
 }
 </script>
 

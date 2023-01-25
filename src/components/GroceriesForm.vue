@@ -142,7 +142,6 @@ function validateAndTrySubmit(e: MouseEvent) {
     formRef.value?.validate(async (errors) => {
         if (!errors) {
             formValue.contact = contactRef.value;
-            console.log("formValue", formValue)
             await axios.post(`${urlStore.backendIP}/groceries/`, formValue).then((response) => {
                 if (response.status === 201) {
                     message.success('Added grocery!')
@@ -160,7 +159,6 @@ function validateAndTrySubmit(e: MouseEvent) {
 
 onMounted(async () => {
     await axios.get(`${urlStore.backendIP}/users`).then((response) => {
-        console.log(response.data.results)
         contactOptions.value = response.data.results.map((result: UserResult) => ({
             'label': result.full_name,
             'value': result.id,

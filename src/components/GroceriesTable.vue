@@ -6,12 +6,13 @@
 <script setup lang="ts">
 import { useUrlStore } from '@/stores/urls'
 import axios from 'axios'
-import { NDataTable, type DataTableColumn, type DataTableSortState } from 'naive-ui';
+import { Trash }from '@vicons/fa'
+import { NDataTable, NCheckbox, NButton, type DataTableColumn, type DataTableSortState } from 'naive-ui';
 import type { SortOrder } from 'naive-ui/es/data-table/src/interface';
-import { defineComponent, onMounted, reactive, ref, type Ref } from 'vue';
+import { defineComponent, onMounted, reactive, ref, h, type Ref } from 'vue';
 
 defineComponent({
-    components: { NDataTable }
+    components: { NDataTable, NCheckbox, NButton, Trash }
 })
 
 interface Grocery {
@@ -33,6 +34,19 @@ interface QueryResponse {
 
 const urlStore = useUrlStore()
 
+async function updateBought(row: Grocery) {
+    const data = { bought: !row.bought }
+    await axios.post(`${urlStore.backendIP}/groceries/${row.id}/update_bought/`, data).then((response) => {
+        row.bought = response.data.bought
+    })
+}
+
+async function deleteGrocery(row: Grocery) {
+    await axios.delete(`${urlStore.backendIP}/groceries/${row.id}/`).then(() => {
+        refreshTable()
+    })
+}
+
 const groceries: Ref<Grocery[]> = ref([])
 const dateColumnTemp: DataTableColumn = {
     title: "Date added",
@@ -45,6 +59,21 @@ const columns = reactive([
     {
         title: "Bought?",
         key: "bought",
+        width: 80,
+        render(row: Grocery) {
+            return h(
+                NCheckbox,
+                {
+                    strong: true,
+                    tertiary: true,
+                    size: 'small',
+                    checked: row.bought,
+                    style: "display: flex; justify-content: center;",
+                    onClick: () => updateBought(row)
+                },
+                { default: () => '' }
+            )
+        }
     },
     {
         title: "Name",
@@ -63,6 +92,29 @@ const columns = reactive([
         title: "Contact",
         key: "contact_name",
     },
+    {
+        title: "Delete",
+        key: "delete",
+        width: 80,
+        render(row: Grocery) {
+            return h(
+                NButton,
+                {
+                    quaternary: true,
+                    type: "error",
+                    renderIcon: () => {
+                        return h(Trash)
+                    },
+                    size: 'medium',
+                    checked: row.bought,
+                    style: "display: flex; justify-content: center;",
+                    onClick: () => deleteGrocery(row)
+                },
+                { default: () => '' }
+            )
+        }
+    },
+
 ])
 const pagination = reactive({
     page: 1,
@@ -121,16 +173,22 @@ function handleSorterChange(sorter: DataTableSortState) {
     }
 }
 
-onMounted(async () => {
-    query(pagination.page, pagination.pageSize, dateColumn.sortOrder)
+async function refreshTable() {
+    await query(pagination.page, pagination.pageSize, dateColumn.sortOrder)
         .then((response: QueryResponse) => {
             groceries.value = response.data
             pagination.pageCount = response.pageCount
             loading.value = false
         })
+}
+
+onMounted(async () => {
+    await refreshTable()
 })
 
-
+defineExpose({
+    refreshTable,
+})
 </script>
 
 <style scoped>

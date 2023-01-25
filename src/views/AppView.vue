@@ -66,7 +66,7 @@ const siderOptions: MenuOption[] = [
                     path: '/chores',
                 }
             },
-            { default: () => 'Default chores' }
+            { default: () => 'Chores' }
         ),
         key: 'chores',
     },
@@ -79,7 +79,7 @@ const siderOptions: MenuOption[] = [
                     path: '/groceries'
                 }
             },
-            { default: () => 'Default groceries' }
+            { default: () => 'Groceries' }
         ),
         key: 'groceries',
     },
