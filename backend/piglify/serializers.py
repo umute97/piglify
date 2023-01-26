@@ -1,10 +1,15 @@
 from rest_framework import serializers
 
-from .models import Grocery
+from .models import Chore, Grocery
 from .models import User
 
+class ChoreSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Chore
+        fields = '__all__'
 class UserSerializer(serializers.ModelSerializer):
     full_name = serializers.ReadOnlyField()
+    chore = serializers.ReadOnlyField()
     class Meta:
         model = User
         fields = '__all__'

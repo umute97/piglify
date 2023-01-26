@@ -5,9 +5,9 @@ from rest_framework.decorators import action
 
 from django_filters.rest_framework import DjangoFilterBackend
 
-from .models import Grocery, User
+from .models import Chore, Grocery, User
 from .filters import GroceryFilter
-from .serializers import GrocerySerializer, UserSerializer
+from .serializers import ChoreSerializer, GrocerySerializer, UserSerializer
 
 class GroceryViewset(viewsets.ModelViewSet):
     serializer_class = GrocerySerializer
@@ -30,4 +30,9 @@ class UserViewset(viewsets.ModelViewSet):
     serializer_class = UserSerializer
     model = User
     queryset = User.objects.all()
+
+class ChoreViewset(viewsets.ModelViewSet):
+    serializer_class = ChoreSerializer
+    model = Chore
+    queryset = Chore.objects.all()
 
