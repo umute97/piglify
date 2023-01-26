@@ -36,6 +36,9 @@ interface GroceryEntry {
 
 interface UserResult {
     id: number,
+    chore: number,
+    initial_chore: number,
+    done: string,
     first: string,
     last: string | null,
     full_name: string,

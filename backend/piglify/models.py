@@ -20,6 +20,7 @@ class User(models.Model):
     last = models.CharField(max_length=20, null=True)
     profile_pic = models.ImageField(upload_to="profiles/", null=True, blank=True)
     initial_chore = models.ForeignKey(Chore, on_delete=models.CASCADE, null=True, blank=True)
+    done = models.DateTimeField(null=True, blank=True)
 
     def __str__(self):
         return f"{self.first} {self.last}"
