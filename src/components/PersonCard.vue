@@ -4,13 +4,22 @@
             <img :src="person.profile_pic" alt="A cool person." />
         </template>
         <template #action>
-            <n-button type="error" @click="toggleDone">
-                <template #icon>
-                    <n-icon v-if="person.done" :component="ThumbsUpRegular" />
-                    <n-icon v-else :component="ThumbsDownRegular" />
-                </template>
-                Done
-            </n-button>
+            <div class="card-action" v-if="person.done">
+                <n-button type="success" @click="toggleDone">
+                    <template #icon>
+                        <n-icon :component="ThumbsUpRegular" />
+                    </template>
+                </n-button>
+                <span>Chore was done on {{ person.done_date }}</span>
+            </div>
+            <div class="card-action" v-else>
+                <n-button type="error" @click="toggleDone">
+                    <template #icon>
+                        <n-icon :component="ThumbsDownRegular" />
+                    </template>
+                </n-button>
+                <span>Chore not done yet!</span>
+            </div>
         </template>
     </n-card>
 </template>
@@ -26,6 +35,7 @@ export interface Person {
     first: string,
     last: string,
     profile_pic?: string,
+    done_date: string,
     done: boolean
 }
 
@@ -44,5 +54,11 @@ function toggleDone() {
 </script>
 
 <style scoped>
-
+.card-action {
+    display: flex;
+    gap: 1rem;
+    padding: 0 1rem;
+    align-items: center;
+    justify-content: space-between;
+}
 </style>

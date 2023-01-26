@@ -2,6 +2,7 @@
     <div id="chores-container">
         <person-card v-for="person in people" :person="person" @toggle-chores-done="toggleChoresDone"/>
     </div>
+    <span>{{ chores }}</span>
 </template>
 
 <script setup lang="ts">
@@ -11,6 +12,12 @@ import { defineComponent, onMounted, reactive, ref, type Ref } from 'vue';
 import axios from 'axios';
 import { useUrlStore } from '@/stores/urls';
 
+interface Chore {
+    id: number,
+    name: string,
+    desc: string,
+    date_added: string
+}
 defineComponent({
     components: { PersonCard }
 })
@@ -18,13 +25,14 @@ defineComponent({
 const urlStore = useUrlStore()
 
 let people: Ref<Person[]> = ref([])
+let chores = ref([])
 
 onMounted(async () => {
     await axios.get(`${urlStore.backendIP}/users/`).then((response) => {
         people.value = response.data.results
-        people.value.forEach((person) => {
-            person.done = true
-        })
+    })
+    await axios.get(`${urlStore.backendIP}/chores/`).then((response) => {
+        chores.value = response.data.results
     })
 })
 
