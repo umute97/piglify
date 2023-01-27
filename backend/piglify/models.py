@@ -36,7 +36,8 @@ class User(models.Model):
         now = datetime.datetime.utcnow().replace(tzinfo=timezone.utc)
         m1 = (now - datetime.timedelta(days=now.weekday()))
         m2 = (self.initial_chore.date_added - datetime.timedelta(days=self.initial_chore.date_added.weekday()))
-        return (m1 - m2).days % 3 + self.initial_chore.id
+        _id = (m1 - m2).days % 3 + self.initial_chore.id
+        return [Chore.objects.get(pk=_id)]
 
 class Grocery(models.Model):
     name = models.CharField(max_length=50, null=False)

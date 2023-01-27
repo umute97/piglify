@@ -3,6 +3,12 @@
         <template #cover>
             <img :src="person.profile_pic" alt="A cool person." />
         </template>
+
+        <div class="chore">
+            <div class="chore-title">{{ person.chore[0].name }}</div>
+            <div>{{ person.chore[0].desc }}</div>
+        </div>
+
         <template #action>
             <div class="card-action" v-if="person.done">
                 <n-button type="success" @click="toggleDone">
@@ -27,11 +33,14 @@
 <script setup lang="ts">
 import { defineComponent } from 'vue';
 import { NCard, NButton, NIcon } from 'naive-ui';
+import type { Chore } from '@/views/ChoresView.vue'
 import { ThumbsUpRegular, ThumbsDownRegular } from '@vicons/fa';
 
 export interface Person {
     id: number,
     full_name: string,
+    initial_chore: number,
+    chore: Chore[],
     first: string,
     last: string,
     profile_pic?: string,
@@ -49,8 +58,9 @@ const props = defineProps<{
 }>()
 
 function toggleDone() {
-    emit('toggleChoresDone', props.person.done)
+    emit('toggleChoresDone', props.person)
 }
+
 </script>
 
 <style scoped>
@@ -60,5 +70,16 @@ function toggleDone() {
     padding: 0 1rem;
     align-items: center;
     justify-content: space-between;
+}
+
+.chore {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.chore-title {
+    font-size: 1.5em;
+    font-weight: bold;
 }
 </style>

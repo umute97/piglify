@@ -1,8 +1,7 @@
 <template>
     <div id="chores-container">
-        <person-card v-for="person in people" :person="person" @toggle-chores-done="toggleChoresDone"/>
+        <person-card v-for="person in people" :person="person" @toggle-chores-done="toggleChoresDone" />
     </div>
-    <span>{{ chores }}</span>
 </template>
 
 <script setup lang="ts">
@@ -12,7 +11,7 @@ import { defineComponent, onMounted, reactive, ref, type Ref } from 'vue';
 import axios from 'axios';
 import { useUrlStore } from '@/stores/urls';
 
-interface Chore {
+export interface Chore {
     id: number,
     name: string,
     desc: string,
@@ -28,18 +27,31 @@ let people: Ref<Person[]> = ref([])
 let chores = ref([])
 
 onMounted(async () => {
-    await axios.get(`${urlStore.backendIP}/users/`).then((response) => {
-        people.value = response.data.results
-    })
-    await axios.get(`${urlStore.backendIP}/chores/`).then((response) => {
-        chores.value = response.data.results
-    })
+    await Promise.all([
+        axios.get(`${urlStore.backendIP}/users/`).then((response) => {
+            people.value = response.data.results
+        }),
+        axios.get(`${urlStore.backendIP}/chores/`).then((response) => {
+            chores.value = response.data.results
+        })
+    ]).catch((err) => console.log(err))
 })
 
-function toggleChoresDone(done: boolean) {
-    //TODO: toggle server state
-    //TODO: get server state
-    //TODO: set local state
+async function toggleChoresDone(person: Person) {
+    let done: boolean, done_date: string | null
+    if (!person.done) {
+        done = true
+        done_date = new Date(Date.now()).toISOString()
+    } else {
+        done = false
+        done_date = null
+    }
+    const postData = { done, done_date }
+    await axios.patch(`${urlStore.backendIP}/users/${person.id}/`, postData).then((response) => {
+        const objIndex = people.value.findIndex(element => element.id == person.id)
+        people.value[objIndex].done = response.data.done
+        people.value[objIndex].done_date = response.data.done_date
+    })
 }
 </script>
 
@@ -49,5 +61,4 @@ function toggleChoresDone(done: boolean) {
     gap: 1rem;
     padding: 1rem;
 }
-
 </style>
