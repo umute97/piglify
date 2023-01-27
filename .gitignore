@@ -35,5 +35,6 @@ __pycache__/
 local_settings.py
 
 backend/piglify-venv
+backend/piglify
 .env
 db.sqlite3

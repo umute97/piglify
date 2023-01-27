@@ -60,7 +60,6 @@ async function toggleChoresDone(person: Person) {
 }
 
 const allChoresDone = computed(() => {
-    console.log("changed")
     return people.value.every(element => element.done)
 })
 </script>

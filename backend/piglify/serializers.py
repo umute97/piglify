@@ -11,6 +11,7 @@ class ChoreSerializer(serializers.ModelSerializer):
     
     def get_name(self, obj):
         return obj.get_name_display()
+
 class UserSerializer(serializers.ModelSerializer):
     full_name = serializers.ReadOnlyField()
     chore = ChoreSerializer(many=True)

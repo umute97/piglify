@@ -15,7 +15,7 @@
                     size="medium" />
             </n-form-item>
         </n-form>
-        <n-button class="submit-button" @click="validateAndTrySubmit">Submit</n-button>
+        <n-button class="submit-button" type="primary" @click="validateAndTrySubmit">Submit</n-button>
     </div>
 </template>
 
