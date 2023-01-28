@@ -86,7 +86,7 @@ const siderOptions: MenuOption[] = [
 ]
 </script>
 
-<style scoped>
+<style>
 .nav {
     padding: 10px 15px;
 }
@@ -104,6 +104,5 @@ const siderOptions: MenuOption[] = [
     grid-template-rows: auto 1fr auto;
     min-height: 100vh;
     margin: 0;
-    font-size: 1.5em;
 }
 </style>

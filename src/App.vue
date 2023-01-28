@@ -23,12 +23,13 @@ const darkTheme: GlobalThemeOverrides = {
 
 const lightTheme: GlobalThemeOverrides = {
   common: {
-    primaryColor: "#000",
-  },
-  Button: {
-    textColor: "#000",
-  },
-  //...
+    primaryColor: "#9b27afFF",
+    baseColor: "#FFFFFFFF",
+    primaryColorHover: "#CF5CE2FF",
+    primaryColorPressed: "#69007fFF",
+    fontSize: "16px",
+    fontSizeMedium: "14px"
+  }
 }
 
 const theme = lightTheme;

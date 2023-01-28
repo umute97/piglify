@@ -1,7 +1,8 @@
 <template>
     <n-card :title="person.full_name">
         <template #cover>
-            <img :src="person.profile_pic" alt="A cool person." />
+            <img loading="lazy" :src="person.profile_pic" :alt="`Cover image of ${ person.full_name }`" />
+
         </template>
 
         <div class="chore">

@@ -35,6 +35,7 @@ onMounted(async () => {
     await Promise.all([
         axios.get(`${urlStore.backendIP}/users/`).then((response) => {
             people.value = response.data.results
+            people.value.forEach((element) => console.log(element.profile_pic))
         }),
         axios.get(`${urlStore.backendIP}/chores/`).then((response) => {
             chores.value = response.data.results
@@ -67,8 +68,9 @@ const allChoresDone = computed(() => {
 <style scoped>
 #chores-container {
     display: flex;
-    gap: 1rem;
+    gap: 5rem;
     padding: 1rem;
+    margin: 0 5em;
 }
 
 .all-chores-done {
