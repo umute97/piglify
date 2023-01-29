@@ -1,5 +1,5 @@
 <template>
-    <n-card :title="person.full_name">
+    <n-card :title="person.full_name" hoverable>
         <template #cover>
             <img loading="lazy" :src="person.profile_pic" :alt="`Cover image of ${ person.full_name }`" />
 
@@ -7,7 +7,7 @@
 
         <div class="chore">
             <div class="chore-title">{{ person.chore[0].name }}</div>
-            <div>{{ person.chore[0].desc }}</div>
+            <div v-html="person.chore[0].desc"></div>
         </div>
 
         <template #action>

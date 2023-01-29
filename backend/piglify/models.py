@@ -9,7 +9,7 @@ CHORES = [
 ]
 class Chore(models.Model):
     name = models.CharField(choices=CHORES, max_length=30, null=False, blank=False)
-    desc = models.CharField(max_length=200, blank=False, null=False)
+    desc = models.CharField(max_length=2000, blank=False, null=False)
     date_added = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

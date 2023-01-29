@@ -68,7 +68,7 @@ const allChoresDone = computed(() => {
 <style scoped>
 #chores-container {
     display: flex;
-    gap: 5rem;
+    gap: 10rem;
     padding: 1rem;
     margin: 0 5em;
 }
