@@ -1,11 +1,8 @@
-FROM node:19-alpine3.16
+FROM node:lts-alpine
 
-WORKDIR /webapp
+RUN npm install -g http-server
+WORKDIR /app
+COPY . .
 
-ENV PATH /webapp/node_modules/.bin:$PATH
-
-COPY package.json /webapp/package.json
-
-RUN npm install
-
-CMD ["npm", "run", "dev"]
+EXPOSE 8080
+CMD ["http-server", "dist"]
