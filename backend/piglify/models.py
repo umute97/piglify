@@ -37,7 +37,6 @@ class User(models.Model):
         m1 = (now - datetime.timedelta(days=now.weekday()))
         m2 = (self.initial_chore.date_added - datetime.timedelta(days=self.initial_chore.date_added.weekday()))
         _id = ((m2 - m1).days + self.initial_chore.id) % 3 + 1 
-        print(self.first, _id, Chore.objects.get(pk=_id))
         return [Chore.objects.get(pk=_id)]
 
 class Grocery(models.Model):
