@@ -36,5 +36,6 @@ local_settings.py
 
 backend/piglify-venv
 backend/piglify
+django-env
 .env
 db.sqlite3
