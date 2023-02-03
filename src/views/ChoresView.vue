@@ -1,9 +1,6 @@
 <template>
-    <div id="chores-container">
+    <div class="chores-wrapper">
         <person-card v-for="person in people" :person="person" @toggle-chores-done="toggleChoresDone" />
-    </div>
-    <div class="all-chores-done" v-if="allChoresDone">
-        All done! <n-icon :component="Check"/>
     </div>
 </template>
 
@@ -66,18 +63,10 @@ const allChoresDone = computed(() => {
 </script>
 
 <style scoped>
-#chores-container {
+.chores-wrapper {
     display: flex;
-    gap: 10rem;
+    flex-direction: column;
     padding: 1rem;
-    margin: 0 5em;
-}
-
-.all-chores-done {
-    display: flex;
-    font-size: 4em;
-    justify-content: center;
-    align-items: center;
-    gap: 2rem;
+    gap: 1rem;
 }
 </style>

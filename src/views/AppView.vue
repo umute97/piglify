@@ -1,21 +1,31 @@
 <template>
-    <div id="content">
-        <n-page-header class="nav" title="Piglify" subtitle="Managing the life of 3 little piglets since 2023.">
+    <div class="wrapper">
+        <div class="nav">
+            <div class="nav__icon">
+                <n-avatar src="https://cdnimg103.lizhi.fm/user/2017/02/04/2583325032200238082_160x160.jpg" />
+                <h1>Piglify</h1>
+            </div>
+            <div class="nav__content">
+                Managing the life of 3 little piglets since 2023.
+            </div>
+            <div class="nav__themeswitcher">
+                <n-switch>
+                    <template #icon>
+                        <n-icon :component="MoonRegular"></n-icon>
+                    </template>
+                </n-switch>
+            </div>
+        </div>
+        <!-- <n-page-header class="nav" title="Piglify" subtitle="Managing the life of 3 little piglets since 2023.">
             <template #extra>
                 <n-space justify="space-between">
-                    <n-switch>
-                        <template #icon>
-                            <n-icon :component="MoonRegular"></n-icon>
-                        </template>
-                    </n-switch>
                 </n-space>
             </template>
             <template #avatar>
-                <n-avatar src="https://cdnimg103.lizhi.fm/user/2017/02/04/2583325032200238082_160x160.jpg" />
             </template>
-        </n-page-header>
-        <n-layout has-sider>
-            <n-layout-sider bordered>
+        </n-page-header> -->
+        <n-layout has-sider position="absolute" style="top: 4rem;">
+            <n-layout-sider bordered collapse-mode="width" collapsed-width="10" show-trigger="arrow-circle">
                 <n-menu :options="siderOptions" />
             </n-layout-sider>
             <n-layout-content id="router-view">
@@ -24,9 +34,6 @@
                 </n-message-provider>
             </n-layout-content>
         </n-layout>
-        <n-page-header class="footer">
-            Made with love in Waldstadt, ver. {{ version }}
-        </n-page-header>
     </div>
 </template>
 
@@ -87,22 +94,40 @@ const siderOptions: MenuOption[] = [
 </script>
 
 <style>
+.wrapper {
+    --band-height: 3rem;
+    --primary-color-300: #CF5CE2FF;
+    --primary-color-400: #9b27afFF;
+    --primary-color-500: #69007fFF;
+    --base-color: #FFFFFFFF;
+}
+
 .nav {
-    padding: 10px 15px;
-}
-
-.footer {
-    height: 50px;
     display: flex;
+    justify-content: space-between;
+    gap: 0.75rem;
     align-items: center;
+    padding: 0.5rem 0.5rem;
+    height: var(--band-height);
+    background-color: var(--primary-color-400);
+
+}
+.nav__icon {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
     justify-content: center;
-    border: 1px solid lightgrey;
+}
+.nav__icon > h1 {
+    font-size: 1.5rem;
+    color: var(--base-color);
 }
 
-#content {
-    display: grid;
-    grid-template-rows: auto 1fr auto;
-    min-height: 100vh;
-    margin: 0;
+.nav__content {
+    font-size: 0.8rem;
+    color: var(--base-color);
+    font-weight: 700;
+    flex-grow: 1;
 }
 </style>
