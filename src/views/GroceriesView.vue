@@ -1,23 +1,21 @@
 <template>
-    <div>
-        <n-layout has-sider sider-placement="right">
-            <n-layout-content class="container">
-                <div class="upperLineContent">
-                <n-button @click="showModal = true" size="large" round type="primary" class="grocery-button">
-                    <template #icon>
-                        <n-icon :component="CartPlus"></n-icon>
-                    </template>
-                    Add item
-                </n-button>
-                <n-button @click="showTutorial = true" size="medium" circle type="default" class="question-button">
-                    <template #icon>
-                        <n-icon :component="Question"></n-icon>
-                    </template>
-                </n-button>
-                </div>
-                <groceries-table ref="groceryTable" />
-            </n-layout-content>
-        </n-layout>
+    <div class="container">
+        <div class="actions">
+            <n-button @click="showModal = true" size="large" round type="primary" class="grocery-button">
+                <template #icon>
+                    <n-icon :component="CartPlus"></n-icon>
+                </template>
+                Add item
+            </n-button>
+            <n-button @click="showTutorial = true" size="medium" circle type="default" class="question-button">
+                <template #icon>
+                    <n-icon :component="Question"></n-icon>
+                </template>
+            </n-button>
+        </div>
+        <div class="grocery-table-wrapper">
+            <groceries-table ref="groceryTable" />
+        </div>
         <n-modal v-model:show="showModal" preset="dialog" title="Add Grocery">
             <n-message-provider>
                 <groceries-form @close-and-refresh-groceries="closeFormAndRefreshTable" />
@@ -61,19 +59,17 @@ function closeTutorialDialog() {
 
 <style scoped>
 .container {
-    margin: 0 1em;
-    text-align: end;
+    padding: 1rem;
 }
 
-.upperLineContent {
+.actions {
     display: flex;
-    gap: 1rem;
     justify-content: end;
-    align-items: center;
     margin-bottom: 1rem;
-    margin-right: 1rem;
+    gap: 1rem;
 }
-.sider {
-    padding: 0 1em;
+
+.grocery-table-wrapper {
+    overflow: hidden;
 }
 </style>

@@ -16,14 +16,6 @@
                 </n-switch>
             </div>
         </div>
-        <!-- <n-page-header class="nav" title="Piglify" subtitle="Managing the life of 3 little piglets since 2023.">
-            <template #extra>
-                <n-space justify="space-between">
-                </n-space>
-            </template>
-            <template #avatar>
-            </template>
-        </n-page-header> -->
         <n-layout has-sider position="absolute" style="top: 4rem;">
             <n-layout-sider bordered collapse-mode="width" collapsed-width="10" show-trigger="arrow-circle">
                 <n-menu :options="siderOptions" />
@@ -42,7 +34,6 @@ import { defineComponent, h } from 'vue'
 import { NPageHeader, NSpace, NButton, NSwitch, NIcon, NLayout, NLayoutContent, NLayoutSider, NMenu, NAvatar, NLayoutFooter, NMessageProvider, type MenuOption } from 'naive-ui'
 import { RouterLink, RouterView } from 'vue-router'
 import { MoonRegular } from '@vicons/fa'
-import { version } from '@/../package.json'
 
 defineComponent({
     components: {

@@ -1,6 +1,6 @@
 <template>
     <n-data-table remote ref="table" :columns="columns" :data="groceries" :loading="loading" :pagination="pagination"
-        @update:sorter="handleSorterChange" @update:page="handlePageChange" />
+        @update:sorter="handleSorterChange" @update:page="handlePageChange" style="white-space:pre;" />
 </template>
 
 <script setup lang="ts">
