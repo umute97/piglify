@@ -1,0 +1,36 @@
+- model: piglify.chore
+  pk: 1
+  fields:
+    name: kitchen
+    desc: <ul>             <li><b>Wipe</b>                 <ul>                     <li><b>counter</b></li>                     <li><b>dining
+      table</b></li>                     <li><b>tiling, boiler and door</b></li>                     <li><b>windowsill</b></li>                     <li><b>cupboards</b></li>                 </ul>             </li>             <li><b>Clean</b>                 <ul>                     <li><b>stove
+      + oven</b></li>                     <li><b>microwave</b></li>                     <li><b>sink
+      + draining board</b></li>                 </ul>             </li>             <li><b>Vacuum</b></li>             <li><b>If
+      necessary:</b>                 <ul>                     <li><b>dust off radiator</b></li>                     <li><b>decalcify
+      kettle</b></li>                     <li><b>clean toaster</b></li>                     <li><b>take
+      out glass waste</b></li>                 </ul>             </li>         </ul>
+    date_added: 2023-01-27 21:35:06.287153+00:00
+- model: piglify.chore
+  pk: 2
+  fields:
+    name: bath
+    desc: <ul>             <li><b>Clean</b>                 <ul>                     <li>sink
+      + tap</li>                     <li>bathtub (incl. filter)</li>                     <li>shelf
+      in WC</li>                     <li>mirror cabinet + mirror (bath and WC)</li>                     <li>toilet
+      (seat)</li>                     <li>washing machine (incl. detergent compartment)</li>                 </ul>             </li>             <li><b>Vacuum:</b>                 <ul>                     <li><b>bath
+      and WC</b></li>                 </ul>             </li>             <li><b>If
+      necessary:</b>                 <ul>                     <li><b>wipe tiling</b></li>                     <li><b>wash
+      common items</b></li>                 </ul>             </li>         </ul>
+    date_added: 2023-01-27 21:35:15.034323+00:00
+- model: piglify.chore
+  pk: 3
+  fields:
+    name: vacuum
+    desc: '<ul>             <li><b>Vacuum</b> hall</li>             <li><b>Wipe</b>                 <ul>                     <li>Kitchen,
+      Bath, Toilet</li>                     <li>dust</li>                 </ul>             </li>             <li><b>If
+      necessary:</b>                 <ul>                     <li><b>wipe</b> hall</li>                     <li><b>vacuum</b>
+      storage room</li>                 </ul>             </li>             <li><b>Take
+      trash out:</b>                 <ul>                     <li><b>residual waste</b></li>                     <li><b>paper
+      and recyclables</b></li>                     <li><b>organic waste</b> (if necessary:
+      scrub waste bin)</li>                 </ul>             </li>         </ul>'
+    date_added: 2023-01-27 21:35:20.749147+00:00

@@ -1,0 +1,27 @@
+- model: piglify.user
+  pk: 1
+  fields:
+    first: Umut
+    last: Elicabuk
+    profile_pic: profiles/umut.jpg
+    initial_chore: 2
+    done: false
+    done_date: null
+- model: piglify.user
+  pk: 2
+  fields:
+    first: Simon
+    last: Schmitt
+    profile_pic: profiles/simon.jpg
+    initial_chore: 3
+    done: false
+    done_date: null
+- model: piglify.user
+  pk: 3
+  fields:
+    first: Jonny
+    last: Jesuthasan
+    profile_pic: profiles/jonny.jpg
+    initial_chore: 1
+    done: true
+    done_date: 2023-01-27 22:06:24+00:00
