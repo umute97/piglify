@@ -6,8 +6,14 @@
         </template>
 
         <div class="chore">
-            <div class="chore-title">{{ person.chore[0].name }}</div>
-            <div v-html="person.chore[0].desc"></div>
+            <n-collapse arrow-placement="right">
+                <n-collapse-item>
+                    <template #header>
+                        <span class="chore-title">{{ person.chore[0].name }}</span>
+                    </template>
+                    <div v-html="person.chore[0].desc"></div>
+                </n-collapse-item>
+            </n-collapse>
         </div>
 
         <template #action>
@@ -33,7 +39,7 @@
 
 <script setup lang="ts">
 import { defineComponent } from 'vue';
-import { NCard, NButton, NIcon } from 'naive-ui';
+import { NCard, NButton, NIcon, NCollapse, NCollapseItem } from 'naive-ui';
 import type { Chore } from '@/views/ChoresView.vue'
 import { ThumbsUpRegular, ThumbsDownRegular } from '@vicons/fa';
 

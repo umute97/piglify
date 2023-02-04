@@ -69,4 +69,12 @@ const allChoresDone = computed(() => {
     padding: 1rem;
     gap: 1rem;
 }
+
+@media only screen and (min-width: 768px) {
+    .chores-wrapper {
+        flex-direction: row;
+        gap: 2rem;
+        margin: 0 2em;
+    }
+}
 </style>
