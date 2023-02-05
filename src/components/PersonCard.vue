@@ -18,7 +18,7 @@
 
         <template #action>
             <div class="card-action" v-if="person.done">
-                <n-button type="success" @click="toggleDone">
+                <n-button type="success" @click="toggleDone" class="card-action-thumb">
                     <template #icon>
                         <n-icon :component="ThumbsUpRegular" />
                     </template>
@@ -26,7 +26,7 @@
                 <span>Chore was done on {{ person.done_date }}</span>
             </div>
             <div class="card-action" v-else>
-                <n-button type="error" @click="toggleDone">
+                <n-button type="error" @click="toggleDone" class="card-action-thumb">
                     <template #icon>
                         <n-icon :component="ThumbsDownRegular" />
                     </template>
@@ -88,5 +88,11 @@ function toggleDone() {
 .chore-title {
     font-size: 1.5em;
     font-weight: bold;
+}
+
+@media only screen and (max-width: 768px) {
+    .card-action-thumb {
+        flex-grow: 1;
+    }
 }
 </style>
