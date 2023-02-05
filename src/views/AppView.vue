@@ -10,8 +10,11 @@
             </div>
             <div class="nav__themeswitcher">
                 <n-switch v-model:value="darkTheme" @update:value="setDarkTheme">
-                    <template #icon>
+                    <template #unchecked-icon>
                         <n-icon :component="MoonRegular"></n-icon>
+                    </template>
+                    <template #checked-icon>
+                        <n-icon :component="Sun"></n-icon>
                     </template>
                 </n-switch>
             </div>
@@ -33,13 +36,14 @@
 import { defineComponent, h, ref, type Ref } from 'vue'
 import { NPageHeader, NButton, NSwitch, NIcon, NLayout, NLayoutContent, NLayoutSider, NMenu, NAvatar, NLayoutFooter, NMessageProvider, type MenuOption } from 'naive-ui'
 import { RouterLink, RouterView } from 'vue-router'
-import { MoonRegular } from '@vicons/fa'
+import { MoonRegular, Sun } from '@vicons/fa'
 
 defineComponent({
     components: {
         NPageHeader,
         NIcon,
         MoonRegular,
+        Sun,
         NButton,
         NLayout,
         NLayoutContent,

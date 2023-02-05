@@ -45,6 +45,10 @@ const darkTheme: GlobalThemeOverrides = {
   },
   Button: {
     textColorPrimary: "#FFF",
+  },
+  Switch: {
+    railColorActive: "#6a0080FF",
+    iconColor: "#131417FF",
   }
 }
 
