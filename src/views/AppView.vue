@@ -17,7 +17,7 @@
             </div>
         </div>
         <n-layout has-sider position="absolute" style="top: 4rem;">
-            <n-layout-sider bordered collapse-mode="width" collapsed-width=10 show-trigger="arrow-circle">
+            <n-layout-sider bordered collapse-mode="width" :collapsed-width=10 show-trigger="arrow-circle">
                 <n-menu :options="siderOptions" />
             </n-layout-sider>
             <n-layout-content id="router-view">
