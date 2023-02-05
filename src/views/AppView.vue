@@ -9,7 +9,7 @@
                 Managing the life of 3 little piglets since 2023.
             </div>
             <div class="nav__themeswitcher">
-                <n-switch>
+                <n-switch v-model:value="darkTheme" @update:value="setDarkTheme">
                     <template #icon>
                         <n-icon :component="MoonRegular"></n-icon>
                     </template>
@@ -17,7 +17,7 @@
             </div>
         </div>
         <n-layout has-sider position="absolute" style="top: 4rem;">
-            <n-layout-sider bordered collapse-mode="width" collapsed-width="10" show-trigger="arrow-circle">
+            <n-layout-sider bordered collapse-mode="width" collapsed-width=10 show-trigger="arrow-circle">
                 <n-menu :options="siderOptions" />
             </n-layout-sider>
             <n-layout-content id="router-view">
@@ -30,8 +30,8 @@
 </template>
 
 <script setup lang="ts">
-import { defineComponent, h } from 'vue'
-import { NPageHeader, NSpace, NButton, NSwitch, NIcon, NLayout, NLayoutContent, NLayoutSider, NMenu, NAvatar, NLayoutFooter, NMessageProvider, type MenuOption } from 'naive-ui'
+import { defineComponent, h, ref, type Ref } from 'vue'
+import { NPageHeader, NButton, NSwitch, NIcon, NLayout, NLayoutContent, NLayoutSider, NMenu, NAvatar, NLayoutFooter, NMessageProvider, type MenuOption } from 'naive-ui'
 import { RouterLink, RouterView } from 'vue-router'
 import { MoonRegular } from '@vicons/fa'
 
@@ -53,6 +53,9 @@ defineComponent({
         RouterLink,
     }
 })
+
+const darkTheme: Ref<boolean> = ref(true);
+const emit = defineEmits(["setDarkTheme"])
 
 const siderOptions: MenuOption[] = [
     {
@@ -82,6 +85,10 @@ const siderOptions: MenuOption[] = [
         key: 'groceries',
     },
 ]
+
+function setDarkTheme() {
+    emit("setDarkTheme", darkTheme.value)
+}
 </script>
 
 <style>
