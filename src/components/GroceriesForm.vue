@@ -150,7 +150,7 @@ function validateAndTrySubmit(e: MouseEvent) {
                     message.success('Added grocery!')
                     emit('closeAndRefreshGroceries')
                 } else {
-                    message.error(response.statusText)
+                    message.error("Oh snap, that didn't work! Sounds like a server error...")
                 }
             })
 
@@ -167,6 +167,8 @@ onMounted(async () => {
             'value': result.id,
             'profile_pic': result.profile_pic,
         }))
+    }).catch(() => {
+        message.error("Could not load users. Sounds like a server error...")
     })
 })
 

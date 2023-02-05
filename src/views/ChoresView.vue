@@ -7,9 +7,9 @@
 <script setup lang="ts">
 import PersonCard from '@/components/PersonCard.vue'
 import type { Person } from '@/components/PersonCard.vue'
-import { NIcon } from 'naive-ui';
+import { NIcon, useMessage } from 'naive-ui';
 import { Check } from '@vicons/fa';
-import { computed, defineComponent, onMounted, reactive, ref, type Ref } from 'vue';
+import { computed, defineComponent, onMounted, ref, type Ref } from 'vue';
 import axios from 'axios';
 import { useUrlStore } from '@/stores/urls';
 
@@ -24,6 +24,7 @@ defineComponent({
 })
 
 const urlStore = useUrlStore()
+const message = useMessage()
 
 let people: Ref<Person[]> = ref([])
 let chores = ref([])
@@ -37,7 +38,9 @@ onMounted(async () => {
         axios.get(`${urlStore.backendIP}/chores/`).then((response) => {
             chores.value = response.data.results
         })
-    ]).catch((err) => console.log(err))
+    ]).catch(() => {
+        message.error("Couldn't load chores. Sounds like a server error...")
+    })
 })
 
 async function toggleChoresDone(person: Person) {
@@ -54,6 +57,8 @@ async function toggleChoresDone(person: Person) {
         const objIndex = people.value.findIndex(element => element.id == person.id)
         people.value[objIndex].done = response.data.done
         people.value[objIndex].done_date = response.data.done_date
+    }).catch(() => {
+        message.error("Oh snap, that didn't work! Please try again later.")
     })
 }
 

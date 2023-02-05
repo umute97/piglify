@@ -6,8 +6,8 @@
 <script setup lang="ts">
 import { useUrlStore } from '@/stores/urls'
 import axios from 'axios'
-import { Trash }from '@vicons/fa'
-import { NDataTable, NCheckbox, NButton, type DataTableColumn, type DataTableSortState } from 'naive-ui';
+import { Trash } from '@vicons/fa'
+import { NDataTable, NCheckbox, NButton, type DataTableColumn, type DataTableSortState, useMessage } from 'naive-ui';
 import type { SortOrder } from 'naive-ui/es/data-table/src/interface';
 import { defineComponent, onMounted, reactive, ref, h, type Ref } from 'vue';
 
@@ -33,18 +33,19 @@ interface QueryResponse {
 }
 
 const urlStore = useUrlStore()
+const message = useMessage()
 
 async function updateBought(row: Grocery) {
     const data = { bought: !row.bought }
     await axios.post(`${urlStore.backendIP}/groceries/${row.id}/update_bought/`, data).then((response) => {
         row.bought = response.data.bought
-    })
+    }).catch(() => message.error("Could not mark grocery as bought. Sounds like a server error..."))
 }
 
 async function deleteGrocery(row: Grocery) {
     await axios.delete(`${urlStore.backendIP}/groceries/${row.id}/`).then(() => {
         refreshTable()
-    })
+    }).catch(() => message.error("Could not delete grocery. Sounds like a server error..."))
 }
 
 const groceries: Ref<Grocery[]> = ref([])
