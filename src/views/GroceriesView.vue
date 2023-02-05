@@ -72,4 +72,10 @@ function closeTutorialDialog() {
 .grocery-table-wrapper {
     overflow: hidden;
 }
+
+@media only screen and (max-width: 768px) {
+    .grocery-button {
+        flex-grow: 1;
+    }
+}
 </style>
