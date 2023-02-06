@@ -2,7 +2,7 @@
     <div class="wrapper">
         <div class="nav">
             <div class="nav__icon">
-                <n-avatar src="https://cdnimg103.lizhi.fm/user/2017/02/04/2583325032200238082_160x160.jpg" />
+                <n-avatar src="/logo.png" />
                 <h1>Piglify</h1>
             </div>
             <div class="nav__content">
