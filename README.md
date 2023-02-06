@@ -1,46 +1,82 @@
-# piglify
+# Piglify - Managing the life of 3 little piglets since 2023.
+This is a leisure project I have started to get familiar with the new vue 3 + TS tooling but it turned out to be quite the useful tool for my flatshare, so I made it public.
 
-This template should help get you started developing with Vue 3 in Vite.
+- [Piglify - Managing the life of 3 little piglets since 2023.](#piglify---managing-the-life-of-3-little-piglets-since-2023)
+  - [Intro](#intro)
+  - [Installation](#installation)
+    - [Front End](#front-end)
+    - [Back End](#back-end)
+  - [About the Docker files in this repo](#about-the-docker-files-in-this-repo)
+## Intro
 
-## Recommended IDE Setup
+The stack is composed of 
+ - [`Django`](https://www.djangoproject.com/) storing three tables
+   - `Users` - storing all flatmates and their data
+   - `Chores` - storing all chores and their description
+   - `Groceries` - storing a list of groceries to buy.
+ - [`Vue 3 (TS)`](https://vuejs.org) with [`naive-ui`](https://naiveui.com) serving as the graphical user interface. It contains
+   - a *Chores* view, displaying the chores of all flatmates and a quick tutorial for each chore, as well as a button to mark it as done
+   - a *Groceries* view, listing all groceries that have or haven't been bought yet as well as a quick tutorial on how to add a new item.
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+## Installation
+I'll be honest with you: I lack experience on the whole deployment process, so everything on this end is a mess.
 
-## Type Support for `.vue` Imports in TS
-
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
-
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
-
-1. Disable the built-in TypeScript Extension
-    1) Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-    2) Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
+### Front End
+Change into the project's root and run
+```bash
+npm i
 ```
-
-### Compile and Hot-Reload for Development
-
-```sh
+to install all dependencies.
+To start a development server, run
+```bash
 npm run dev
 ```
+You need an `.env` file that specifies a variable called `VITE_BACKEND_BASE_URL` and set it to the api endpoint of the Django app (will explain this in the Back End section).
 
-### Type-Check, Compile and Minify for Production
+### Back End
+**Python >=3.9 is required.**
 
-```sh
-npm run build
+>**Without a virtual environment (not recommended)**
+
+Change into the `backend` folder and install all dependencies with
+```bash
+pip install --user -r requirements.txt
 ```
 
-### Lint with [ESLint](https://eslint.org/)
+>**With a virtual environment**
 
-```sh
-npm run lint
+If you don't like to clutter your site-packages, just create a `venv`:
+```bash
+python -m venv <venv-name>
 ```
+and activate it by running
+```bash
+source <venv-name>/bin/activate<.alt-shell>
+```
+Installing the dependencies should work by running
+```bash
+pip install -r requirements.txt
+```
+You will need a `.env` file that looks like
+```ini
+DEBUG=0
+DJANGO_ALLOWED_HOSTS=<the ip your api is running on and associated aliases>
+SECRET_KEY=<a long-ass secret key you cannot tell a soul or else>
+```
+Initialize the database with
+```bash
+python manage.py migrate
+```
+Go ahead and edit the `backend/fixtures` to your liking, adding the chores and users you require and apply them with
+```bash
+python manage.py loaddata fixtures/chores.yaml
+python manage.py loaddata fixtures/users.yaml
+```
+in the `backend` directory.
+Finally, we can run the development server by executing
+```bash
+python manage.py runserver
+```
+
+## About the Docker files in this repo
+Those were for local testing only. They won't do you any good other than serving as a template.
