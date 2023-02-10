@@ -11,6 +11,7 @@ FROM nginx:1.23-alpine AS deploy-stage
 
 RUN rm -rf /usr/share/nginx/html/*
 
+COPY nginx.conf /etc/nginx/nginx.conf
 COPY --from=build-stage /dist /usr/share/nginx/html
 
 EXPOSE 80
