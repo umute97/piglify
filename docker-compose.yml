@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  frontend:
+    image: piglify-frontend:latest
+    env_file: .env
+    ports:
+      - 80:80
+
+  backend:
+    image: piglify-backend:latest
+    env_file: .env
+    ports:
+      - 8000:8000
+    volumes:
+      - ./backend/db.sqlite3:/db.sqlite3
