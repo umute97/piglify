@@ -33,10 +33,11 @@ class User(models.Model):
     
     @property
     def chore(self):
-        now = datetime.datetime.utcnow().replace(tzinfo=timezone.utc)
-        m1 = (now - datetime.timedelta(days=now.weekday()))
-        m2 = (self.initial_chore.date_added - datetime.timedelta(days=self.initial_chore.date_added.weekday()))
-        _id = ((m2 - m1).days + self.initial_chore.id) % 3 + 1 
+        today = datetime.date.today()
+        start_date = self.initial_chore.date_added.date()
+        start_wed = start_date - datetime.timedelta(days=start_date.weekday()-2)  # Set the start date to the most recent Wednesday
+        week_number = (today - start_wed).days // 7
+        _id = (self.initial_chore.id + week_number) % 3
         return [Chore.objects.get(pk=_id)]
 
 class Grocery(models.Model):
