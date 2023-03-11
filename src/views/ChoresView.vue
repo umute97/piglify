@@ -1,6 +1,11 @@
 <template>
     <div class="chores-wrapper">
-        <person-card v-for="person in people" :person="person" @toggle-chores-done="toggleChoresDone" />
+        <div class="chore-announcer">
+            <h1>New chores every Wednesday!</h1>
+        </div>
+        <div class="people-wrapper">
+            <person-card v-for="person in people" :person="person" @toggle-chores-done="toggleChoresDone" />
+        </div>
     </div>
 </template>
 
@@ -68,18 +73,35 @@ const allChoresDone = computed(() => {
 </script>
 
 <style scoped>
-.chores-wrapper {
+.people-wrapper {
     display: flex;
     flex-direction: column;
     padding: 1rem;
     gap: 1rem;
 }
 
+.chore-announcer {
+    margin-top: 1rem;
+    margin-right: 1rem;
+    margin-left: 1rem;
+    overflow: hidden;
+    text-align: center;
+    border: 1px solid var(--primary-color-300);
+}
+
+
 @media only screen and (min-width: 768px) {
-    .chores-wrapper {
+    .people-wrapper {
         flex-direction: row;
         gap: 2rem;
-        margin: 0 2em;
+        margin: 0 2rem;
+    }
+    .chores-wrapper {
+        display: grid;
+        place-items: center;
+    }
+    .chore-announcer {
+        padding: 0 3rem;
     }
 }
 </style>
