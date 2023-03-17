@@ -15,6 +15,7 @@ class ChoreSerializer(serializers.ModelSerializer):
 class UserSerializer(serializers.ModelSerializer):
     full_name = serializers.ReadOnlyField()
     chore = ChoreSerializer(many=True)
+    next_chore = ChoreSerializer(many=True)
     class Meta:
         model = User
         fields = '__all__'

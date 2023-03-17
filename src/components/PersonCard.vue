@@ -14,6 +14,10 @@
                     <div v-html="person.chore[0].desc"></div>
                 </n-collapse-item>
             </n-collapse>
+            <div class="next-up">
+                <span class="chore-title">Next up:</span>
+                <span class="next-chore">{{ person.next_chore[0].name }}</span>
+            </div>
         </div>
 
         <template #action>
@@ -48,6 +52,7 @@ export interface Person {
     full_name: string,
     initial_chore: number,
     chore: Chore[],
+    next_chore: Chore[],
     first: string,
     last: string,
     profile_pic?: string,
@@ -85,8 +90,20 @@ function toggleDone() {
     gap: 0.5rem;
 }
 
+.next-up {
+    display: flex;
+    justify-content: end;
+    gap: 1rem;
+    align-items: center;
+}
+
 .chore-title {
-    font-size: 1.5em;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.next-chore {
+    font-size: 1rem;
     font-weight: bold;
 }
 
