@@ -15,8 +15,8 @@
                 </n-collapse-item>
             </n-collapse>
             <div class="next-up">
-                <span class="chore-title">Next up:</span>
-                <span class="next-chore">{{ person.next_chore[0].name }}</span>
+                <label>Next up</label>
+                <span>{{ person.next_chore[0].name }}</span>
             </div>
         </div>
 
@@ -91,19 +91,25 @@ function toggleDone() {
 }
 
 .next-up {
-    display: flex;
-    justify-content: end;
-    gap: 1rem;
-    align-items: center;
+    position: relative;
+    border: 2px purple solid; 
+    border-radius: 0.5rem;
+    padding: 1.5rem 1rem 0.5rem 1rem;
+    margin-top: 1rem;
+    font-size: 1.1rem;
+}
+
+.next-up>label {
+    position: absolute;
+    border-radius: 0.5rem;
+    padding: 0 0.5rem;
+    top: -0.5rem;
+    left: -1rem;
+    background: var(--primary-color-400);
 }
 
 .chore-title {
     font-size: 1.5rem;
-    font-weight: bold;
-}
-
-.next-chore {
-    font-size: 1rem;
     font-weight: bold;
 }
 
