@@ -2,12 +2,14 @@ version: '3'
 
 services:
   frontend:
+    restart: always
     image: piglify-frontend:latest
     env_file: .env
     ports:
       - 80:80
 
   backend:
+    restart: always
     image: piglify-backend:latest
     env_file: .env
     ports:

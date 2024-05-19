@@ -4,7 +4,7 @@ from django.utils import timezone
 
 CHORES = [
     ("kitchen", "Kitchen"),
-    ("bath", "WC + Bath"),
+    ("bath", "Bath + Restroom"),
     ("vacuum", "Wipe and Vacuum")
 ]
 class Chore(models.Model):
