@@ -19,8 +19,8 @@
 - model: piglify.user
   pk: 3
   fields:
-    first: Jonny
-    last: Jesuthasan
+    first: Neue:r
+    last: Mitbewohner:in
     profile_pic: profiles/jonny.jpg
     initial_chore: 1
     done: true
