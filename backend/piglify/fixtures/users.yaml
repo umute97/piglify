@@ -10,18 +10,18 @@
 - model: piglify.user
   pk: 2
   fields:
-    first: Simon
-    last: Schmitt
-    profile_pic: profiles/simon.jpg
+    first: Person
+    last: Person
+    profile_pic: profiles/person.jpg
     initial_chore: 3
     done: false
     done_date: null
 - model: piglify.user
   pk: 3
   fields:
-    first: Neue:r
-    last: Mitbewohner:in
-    profile_pic: profiles/jonny.jpg
+    first: Person
+    last: Person
+    profile_pic: profiles/person.jpg
     initial_chore: 1
     done: true
     done_date: 2023-01-27 22:06:24+00:00
