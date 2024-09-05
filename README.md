@@ -4,6 +4,8 @@ This is a leisure project I have started to get familiar with the new vue 3 + TS
   - [Intro](#intro)
   - [Installation](#installation)
 
+Currently hosted on my shitty little RPi 2... [Website (for you, just and auth wall)](https://piglify.duckdns.org)
+
 ## Intro
 
 The stack is composed of 
